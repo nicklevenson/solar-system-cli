@@ -26,18 +26,28 @@ class Api
         planets = get_space_bodies.select{|body| body["isPlanet"] == true}
     end
 
+    def get_list_of_moons
+        moons = get_space_bodies.select{|body| body["aroundPlaner"] != {}}
+    end
 
     def get_space_body_by_name(name)
         array_of_bodies = get_space_bodies.select{|body| body["englishName"] == name}
         # queries for a particular space object based on name parameter
-
+    end
+    def get_space_body_by_latin_name(name)
+        array_of_bodies = get_space_bodies.select{|body| body["name"] == name}
+        # queries for a particular space object based on name parameter
     end
 
     def add_planets
        get_list_of_planets.each {|planet| Planet.new(planet)}
-       Planet.all
-     
     end
+
+    def add_moons
+        get_list_of_moons.each {|moon| Moon.new(moon)}
+    end
+
+
  
 end
 
