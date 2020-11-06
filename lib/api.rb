@@ -1,4 +1,5 @@
 require 'pry'
+
 class Api
     attr_accessor :url
 
@@ -16,4 +17,28 @@ class Api
         JSON.parse(get_response)
     end
 
+    def get_space_bodies
+         #queries to retrieve an array of space objects
+        parse_response['bodies']
+    end
+
+    def get_list_of_planets
+        planets = get_space_bodies.select{|body| body["isPlanet"] == true}
+    end
+
+
+    def get_space_body_by_name(name)
+        array_of_bodies = get_space_bodies.select{|body| body["englishName"] == name}
+        # queries for a particular space object based on name parameter
+
+    end
+
+    def add_planets
+       get_list_of_planets.each {|planet| Planet.new(planet)}
+       Planet.all
+     
+    end
+ 
 end
+
+# api = Api.new
