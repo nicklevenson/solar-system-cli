@@ -1,15 +1,21 @@
 class Moon
-    attr_accessor :name
+    attr_accessor 
 
     @@all = []
 
-    def initialize(name)
-        @name = name
+    def initialize(moon)
+        moon.each do |key,value| 
+            self.class.attr_accessor(key)
+            self.send("#{key}=", value)
+
+        end
         @@all << self
     end
 
     def self.all
         @@all
     end
+
+   
 
 end
