@@ -43,40 +43,30 @@ class Cli
         puts "To go back to the start enter: 'home'"
         puts "To exit enter: 'exit'"
         input = gets.chomp
-       
-
+    
         if input == "list moons"
             list_moons
-
         elsif input == "mass"
             get_mass
-
         elsif input == "gravity"
             get_gravity
-
         elsif input == "distance to sun"
             distance_to_sun
-
         elsif input == "density"
-    
+            get_density
         elsif input == "discovered by"
-            discovered_by
-           
+            discovered_by 
         elsif input == "discovery date"
-    
+            get_date
         elsif input == "exit"
             
         elsif input == "home"
             home
-    
 
-            
         else
             puts "Not a valid input, try again."
             call
         end
-
-
     end
     
     def show_planet(input)
@@ -85,17 +75,49 @@ class Cli
     def show_moon(input)
         Moon.find_by_name(input)
     end
-
-
     def planets
         Planet.all.collect{|planet| planet.englishName}
     end
     def moons
         Moon.all.collect{|moon| moon.englishName}
     end
-
     def list_planets
         planets.sort.each_with_index{|planet, index| puts "#{index+1}. #{planet}"}
+    end
+
+    def get_date
+        if show_planet(@objectInput)!=nil
+            if show_planet(@objectInput).discoveryDate != ""
+                puts "#{@objectInput} was discovered on #{show_planet(@objectInput).discoveryDate}."
+            else
+                puts "#{@objectInput} was discovered sometime during the dawn of man."
+            end
+        elsif show_moon(@objectInput)!=nil
+
+            if show_moon(@objectInput).discoveryDate != ""
+                puts "#{@objectInput} was discovered on #{show_moon(@objectInput).discoveryDate}."
+            else
+                puts "#{@objectInput} was discovered sometime during the dawn of man."
+            end
+        else
+            "invalid input. try again."
+        end
+        call
+    end
+
+    def get_density
+        if show_planet(@objectInput)!=nil
+            puts "The density of #{@objectInput} is #{show_planet(@objectInput).density} grams per cubic centimeter."
+        elsif show_moon(@objectInput)!=nil
+            if show_moon(@objectInput).density != 0
+                puts "The density of #{@objectInput} is #{show_moon(@objectInput).density } grams per cubic centimeter."
+            else
+                puts "We don't have a measurment for this body!"
+            end
+        else
+            "invalid input. try again."
+        end
+        call
     end
 
     def distance_to_sun
@@ -119,7 +141,11 @@ class Cli
         if show_planet(@objectInput)!=nil
             puts "The gravity of #{@objectInput} is #{show_planet(@objectInput).gravity} meters per second squared."
         elsif show_moon(@objectInput)!=nil
-            puts "The gravity of #{@objectInput} is #{show_moon(@objectInput).gravity} meters per second squared."
+            if show_moon(@objectInput).gravity != 0
+                puts "The gravity of #{@objectInput} is #{show_moon(@objectInput).gravity} meters per second squared."
+            else
+                puts "We don't have a measurment for this body!"
+            end
         else
             "invalid input. try again."
         end
