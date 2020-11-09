@@ -21,7 +21,7 @@ class Cli
 
     def get_initial_input
         puts "Enter the name of a planet you'd like to know more about"
-        input = gets.chomp.capitalize
+        input = gets.chomp
         if planets.include?(input)
             puts "Ah, #{input}! A lovely choice."
             @objectInput = input
@@ -41,7 +41,10 @@ class Cli
         puts "To see when this object was discovered enter: 'discovery date'"
         input = gets.chomp
         if input == "list moons"
-            list_moons
+            if list_moons != false  
+            else
+                puts "This object has no moons"
+            end
         end
     end
     
@@ -59,8 +62,11 @@ class Cli
     end
 
     def list_moons
+        if show_planet(@objectInput).find_moons == []
+            return false
+        else
         show_planet(@objectInput).find_moons.each_with_index{|moon, index| puts "#{index+1}. #{moon.englishName}"}
-    
+        end
     end
      
 
