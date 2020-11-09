@@ -46,49 +46,12 @@ class Cli
        
 
         if input == "list moons"
-            # this filters out moons from list_moons since list_moons will fail on a moon object.
-            if show_planet(@objectInput)!=nil 
-                if list_moons != false
-                    puts "If you want to know more about a moon, enter it's name."
-                    puts "If you want to go back to the start, enter 'home'."
-
-                    #reseting objectInput to the moon input
-                    input = gets.chomp
-                    if input == 'home'
-                        home
-                    end
-                    if moons.include?(input)
-                        @objectInput = input
-                        call
-                    else
-                        puts "Not a valid input. Try again."
-                        call
-                    end
-                else
-                    puts "This object has no moons"
-                    call
-                end
-            end
-        
+            list_moons
     
-
         elsif input == "discovered by"
-            if show_planet(@objectInput)!=nil
-                if show_planet(@objectInput).discoveredBy == ""
-                    puts "It is unknown who discovered #{objectInput}."
-                else
-                    puts "This planet was discovered by #{show_planet(@objectInput).discoveredBy}."
-                end
-            end
-          
-            if show_moon(@objectInput)!=nil
-                if show_moon(@objectInput).discoveredBy == ""
-                    puts "It is unknown who discovered #{objectInput}."
-                else
-                    puts "This moon was discovered by #{show_moon(@objectInput).discoveredBy}."
-                end
-            end
-            call
+            discovered_by
+            
+
         
     
         elsif input == "exit"
@@ -119,7 +82,7 @@ class Cli
         Planet.all.collect{|planet| planet.englishName}
     end
     def moons
-        Moon.all.collect{|moon| moon.englishName}
+        Moon.all.collect{|moon| moon.id}
     end
 
 
@@ -127,12 +90,48 @@ class Cli
         planets.sort.each_with_index{|planet, index| puts "#{index+1}. #{planet}"}
     end
 
-    def list_moons
-        if show_planet(@objectInput).find_moons == []
-            return false
-        else
-        show_planet(@objectInput).find_moons.each_with_index{|moon, index| puts "#{index+1}. #{moon.englishName}"}
+    def discovered_by
+        if show_planet(@objectInput)!=nil
+            if show_planet(@objectInput).discoveredBy == ""
+                puts "It is unknown who discovered #{objectInput}."
+            else
+                puts "This planet was discovered by #{show_planet(@objectInput).discoveredBy}."
+            end
         end
+      
+        if show_moon(@objectInput)!=nil
+            if show_moon(@objectInput).discoveredBy == ""
+                puts "It is unknown who discovered #{objectInput}."
+            else
+                puts "This moon was discovered by #{show_moon(@objectInput).discoveredBy}."
+            end
+        end
+        call
+    end
+
+    def list_moons
+        if show_planet(@objectInput).find_moons != [] 
+            show_planet(@objectInput).find_moons.each_with_index{|moon, index| puts "#{index+1}. #{moon.id}"}
+            puts "If you want to know more about a moon, enter it's name."
+            puts "If you want to go back to the start, enter 'home'."
+
+            #reseting objectInput to the moon input
+            input = gets.chomp
+            if input == 'home'
+                home
+            end
+            if moons.include?(input)
+                @objectInput = input
+                call
+            else
+                puts "Not a valid input. Try again."
+                call
+            end
+        else
+            puts "This object has no moons"
+            call
+        end
+        
     end
      
 
