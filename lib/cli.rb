@@ -55,6 +55,7 @@ class Cli
             get_gravity
 
         elsif input == "distance to sun"
+            distance_to_sun
 
         elsif input == "density"
     
@@ -95,6 +96,23 @@ class Cli
 
     def list_planets
         planets.sort.each_with_index{|planet, index| puts "#{index+1}. #{planet}"}
+    end
+
+    def distance_to_sun
+        if show_planet(@objectInput)!=nil
+            puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).perihelion} kilometers."
+            puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers."
+        elsif show_moon(@objectInput)!=nil
+            if show_moon(@objectInput).perihelion != 0
+                puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).perihelion} kilometers."
+                puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers."
+            else
+                puts "We don't have a measurment for this body!"
+            end
+        else
+            "invalid input. try again."
+        end
+        call
     end
 
     def get_gravity
