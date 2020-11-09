@@ -47,16 +47,24 @@ class Cli
 
         if input == "list moons"
             list_moons
+
+        elsif input == "mass"
+            get_mass
+
+        elsif input == "gravity"
+            get_gravity
+
+        elsif input == "distance to sun"
+
+        elsif input == "density"
     
         elsif input == "discovered by"
             discovered_by
-            
-
-        
+           
+        elsif input == "discovery date"
     
         elsif input == "exit"
             
-        
         elsif input == "home"
             home
     
@@ -82,12 +90,39 @@ class Cli
         Planet.all.collect{|planet| planet.englishName}
     end
     def moons
-        Moon.all.collect{|moon| moon.id}
+        Moon.all.collect{|moon| moon.englishName}
     end
-
 
     def list_planets
         planets.sort.each_with_index{|planet, index| puts "#{index+1}. #{planet}"}
+    end
+
+    def get_gravity
+        if show_planet(@objectInput)!=nil
+            puts "The gravity of #{@objectInput} is #{show_planet(@objectInput).gravity} meters per second squared."
+        elsif show_moon(@objectInput)!=nil
+            puts "The gravity of #{@objectInput} is #{show_moon(@objectInput).gravity} meters per second squared."
+        else
+            "invalid input. try again."
+        end
+        call
+    end
+
+    def get_mass
+        if show_planet(@objectInput)!=nil
+            massValue = show_planet(@objectInput).mass["massValue"]
+            massExponent = show_planet(@objectInput).mass["massExponent"]
+            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms."
+        
+        elsif show_moon(@objectInput)!=nil
+            massValue = show_moon(@objectInput).mass["massValue"]
+            massExponent = show_moon(@objectInput).mass["massExponent"]
+            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms."
+        
+        else
+            "invalid input. try again."
+        end
+        call
     end
 
     def discovered_by
@@ -110,28 +145,36 @@ class Cli
     end
 
     def list_moons
-        if show_planet(@objectInput).find_moons != [] 
-            show_planet(@objectInput).find_moons.each_with_index{|moon, index| puts "#{index+1}. #{moon.id}"}
-            puts "If you want to know more about a moon, enter it's name."
-            puts "If you want to go back to the start, enter 'home'."
+        if show_planet(@objectInput) != nil
+            if show_planet(@objectInput).find_moons != []
+                show_planet(@objectInput).find_moons.each_with_index do |moon, index| 
+                    if moon.englishName != ""
+                        puts "#{index+1}. #{moon.englishName}" 
+                    end
+                end
+                puts "If you want to know more about a moon, enter it's name."
+                puts "If you want to go back to the start, enter 'home'."
 
-            #reseting objectInput to the moon input
-            input = gets.chomp
-            if input == 'home'
-                home
-            end
-            if moons.include?(input)
-                @objectInput = input
-                call
+                #reseting objectInput to the moon input
+                input = gets.chomp
+                if input == 'home'
+                    home
+                end
+                if moons.include?(input)
+                    @objectInput = input
+                    call
+                else
+                    puts "Not a valid input. Try again."
+                    call
+                end
             else
-                puts "Not a valid input. Try again."
+                puts "This object has no moons"
                 call
             end
         else
-            puts "This object has no moons"
+            puts "Sorry moons don't really have moons..."
             call
         end
-        
     end
      
 

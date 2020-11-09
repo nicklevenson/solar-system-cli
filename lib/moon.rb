@@ -13,7 +13,7 @@ class Moon
     end
 
     def self.find_by_name(name)
-        self.all.select{|moon| moon.id == name}[0]
+        self.all.select{|moon| moon.englishName == name}[0]
     end
 
     def self.all
