@@ -6,7 +6,7 @@ class Cli
     end
 
     def home
-        puts "Welcome to the Solar System"
+        puts "WELCOME TO THE SOLAR SYSTEM!".underline
         puts "Here's a list of planets in our Solar System (includes dwarf planets):"
         list_planets
         get_initial_input
@@ -116,12 +116,12 @@ class Cli
 
     def distance_to_sun
         if show_planet(@objectInput)!=nil
-            puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).perihelion} kilometers."
-            puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers."
+            puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).perihelion/4313 } times over."
+            puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).perihelion/4313 } times over."
         elsif show_moon(@objectInput)!=nil
             if show_moon(@objectInput).perihelion != 0
-                puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).perihelion} kilometers."
-                puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers."
+                puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).perihelion/4313 } times over."
+                puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).perihelion/4313 } times over."
             else
                 puts "We don't have a measurment for this body!"
             end
@@ -150,12 +150,12 @@ class Cli
         if show_planet(@objectInput)!=nil
             massValue = show_planet(@objectInput).mass["massValue"]
             massExponent = show_planet(@objectInput).mass["massExponent"]
-            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms."
+            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms. This is equivalent to about #{(massValue ** massExponent)/11062} school busses"
         
         elsif show_moon(@objectInput)!=nil
             massValue = show_moon(@objectInput).mass["massValue"]
             massExponent = show_moon(@objectInput).mass["massExponent"]
-            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms."
+            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms. This is equivalent to about #{(massValue ** massExponent)/11062} school busses"
         
         else
             "invalid input. try again."
