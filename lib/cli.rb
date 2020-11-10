@@ -26,16 +26,16 @@ class Cli
     end
 
     def call
-        puts "What do you want to know about #{@objectInput}?"
-        puts "To see a list of this object's moons enter: 'list moons'"
-        puts "To see the mass of this object enter: 'mass'"
-        puts "To see the gravity of this object enter: 'gravity'"
-        puts "To see this object's distance to its orbital center (sun for planets - planet for moon) enter: 'distance to'"
-        puts "To see this object's density enter: 'density'"
-        puts "To see who this object was discovered by enter: 'discovered by'"
-        puts "To see when this object was discovered enter: 'discovery date'"
-        puts "To go back to the start enter: 'home'"
-        puts "To exit enter: 'exit'"
+        puts "---What do you want to know about #{@objectInput}?"
+        puts "---To see a list of this object's moons enter: 'list moons'"
+        puts "---To see the mass of this object enter: 'mass'"
+        puts "---To see the gravity of this object enter: 'gravity'"
+        puts "---To see this object's distance to its orbital center (sun for planets - planet for moon) enter: 'distance to'"
+        puts "---To see this object's density enter: 'density'"
+        puts "---To see who this object was discovered by enter: 'discovered by'"
+        puts "---To see when this object was discovered enter: 'discovery date'"
+        puts "---To go back to the start enter: 'home'"
+        puts "---To exit enter: 'exit'"
         input = gets.chomp
     
         if input == "list moons"
@@ -56,7 +56,6 @@ class Cli
             
         elsif input == "home"
             home
-
         else
             puts "Not a valid input, try again."
             call
