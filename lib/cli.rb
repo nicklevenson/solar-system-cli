@@ -158,6 +158,7 @@ class Cli
             massValue = show_moon(@objectInput).mass["massValue"]
             massExponent = show_moon(@objectInput).mass["massExponent"]
             mass = massValue * (10 ** massExponent)
+            earthMass = 7.34600*(10**22)
             puts "The mass of #{@objectInput} is: #{mass} kilograms. This is equivalent to about #{mass/11062} school busses, or #{mass/earthMass} Earths."
         
         else
