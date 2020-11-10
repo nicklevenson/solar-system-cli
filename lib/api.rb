@@ -6,6 +6,8 @@ class Api
     def initialize
         @url = 'https://api.le-systeme-solaire.net/rest/bodies'
         # add_planet_by_name(planet)
+        add_moons
+        add_planets
     end
 
     # API retrieval
@@ -32,9 +34,6 @@ class Api
     def add_moons
         get_list_of_moons.each {|moon| Moon.new(moon)}
     end
-
-
-    # Utility - development purposes only. 
    
     # getting a list of planets and moons from the XML query
     def get_list_of_planets
@@ -44,6 +43,11 @@ class Api
     def get_list_of_moons
         moons = get_space_bodies.select{|body| body["aroundPlanet"] != nil}
     end
+
+    # Utility - development purposes only - Not being used in running the app. 
+    # 
+    # 
+    # 
 
     # Access individual planets/moons by name from the XML
     def get_space_body_by_name(name)
@@ -61,11 +65,5 @@ class Api
         Planet.new(planet)
     end
 
-
-
-
-
- 
 end
 
-# api = Api.new

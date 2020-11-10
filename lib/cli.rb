@@ -1,22 +1,16 @@
-
 class Cli
-
     attr_accessor :objectInput
-
     def start
         api = Api.new
-        api.add_moons
-        api.add_planets
         home
     end
+
     def home
         puts "Welcome to the Solar System"
         puts "Here's a list of planets in our Solar System (includes dwarf planets):"
-        
         list_planets
         get_initial_input
         call
-
     end
 
     def get_initial_input
@@ -219,9 +213,6 @@ class Cli
             puts "Sorry moons don't really have moons..."
             call
         end
-    end
-     
-
-
+    end   
 end
 
