@@ -101,7 +101,7 @@ class Cli
 
     def get_density
         if show_planet(@objectInput)!=nil
-            puts "The density of #{@objectInput} is #{show_planet(@objectInput).density} grams per cubic centimeter."
+            puts "The density of #{@objectInput} is #{show_planet(@objectInput).density} grams per cubic centimeter. That's"
         elsif show_moon(@objectInput)!=nil
             if show_moon(@objectInput).density != 0
                 puts "The density of #{@objectInput} is #{show_moon(@objectInput).density } grams per cubic centimeter."
@@ -117,11 +117,11 @@ class Cli
     def distance_to_sun
         if show_planet(@objectInput)!=nil
             puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).perihelion/4313 } times over."
-            puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).perihelion/4313 } times over."
+            puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).aphelion/4313 } times over."
         elsif show_moon(@objectInput)!=nil
             if show_moon(@objectInput).perihelion != 0
                 puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).perihelion/4313 } times over."
-                puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).perihelion/4313 } times over."
+                puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).aphelion/4313 } times over."
             else
                 puts "We don't have a measurment for this body!"
             end
@@ -150,12 +150,15 @@ class Cli
         if show_planet(@objectInput)!=nil
             massValue = show_planet(@objectInput).mass["massValue"]
             massExponent = show_planet(@objectInput).mass["massExponent"]
-            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms. This is equivalent to about #{(massValue ** massExponent)/11062} school busses"
+            mass = massValue * (10 ** massExponent)
+            earthMass = 7.34600*(10**22)
+            puts "The mass of #{@objectInput} is: #{mass} kilograms. This is equivalent to about #{mass/11062} school busses, or #{mass/earthMass} Earths."
         
         elsif show_moon(@objectInput)!=nil
             massValue = show_moon(@objectInput).mass["massValue"]
             massExponent = show_moon(@objectInput).mass["massExponent"]
-            puts "The mass of #{@objectInput} is: #{massValue ** massExponent} kilograms. This is equivalent to about #{(massValue ** massExponent)/11062} school busses"
+            mass = massValue * (10 ** massExponent)
+            puts "The mass of #{@objectInput} is: #{mass} kilograms. This is equivalent to about #{mass/11062} school busses, or #{mass/earthMass} Earths."
         
         else
             "invalid input. try again."
