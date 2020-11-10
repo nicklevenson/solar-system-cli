@@ -1,6 +1,7 @@
 # This class initializes moon objects. A moon belongs to a planet.
 class Moon
     extend Findable
+    include HelperMethods
     @@all = []
 
     def initialize(moon)

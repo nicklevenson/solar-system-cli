@@ -65,11 +65,11 @@ class Cli
         end
     end
     
-    def show_planet(input)
-        Planet.find_by_name(input)
+    def show_planet
+        Planet.find_by_name(@objectInput)
     end
-    def show_moon(input)
-        Moon.find_by_name(input)
+    def show_moon
+        Moon.find_by_name(@objectInput)
     end
     def planets
         Planet.all.collect{|planet| planet.englishName}
@@ -82,23 +82,23 @@ class Cli
     end
 
     def is_planet?
-        show_planet(@objectInput)!=nil
+        show_planet!=nil
     end
 
     def is_moon?
-        show_moon(@objectInput)!=nil
+        show_moon!=nil
     end
 
     def get_date
         if is_planet?
-            if show_planet(@objectInput).discoveryDate != ""
-                puts "#{@objectInput} was discovered on #{show_planet(@objectInput).discoveryDate}."
+            if show_planet.discoveryDate != ""
+                puts "#{@objectInput} was discovered on #{show_planet.discoveryDate}."
             else
                 puts "#{@objectInput} was discovered sometime during the dawn of man."
             end
         elsif is_moon?
-            if show_moon(@objectInput).discoveryDate != ""
-                puts "#{@objectInput} was discovered on #{show_moon(@objectInput).discoveryDate}."
+            if show_moon.discoveryDate != ""
+                puts "#{@objectInput} was discovered on #{show_moon.discoveryDate}."
             else
                 puts "#{@objectInput} was discovered sometime during the dawn of man."
             end
@@ -109,15 +109,12 @@ class Cli
     end
 
     def get_density
+        earthDensity = 5.5136
         if is_planet?
-            density = show_planet(@objectInput).density
-            earthDensity = 5.5136 
-            puts "The density of #{@objectInput} is #{density} grams per cubic centimeter. That's #{density/earthDensity} times that of Earth's."
+            puts "The density of #{@objectInput} is #{show_planet.density} grams per cubic centimeter. That's #{show_planet.density/earthDensity} times that of Earth's."
         elsif is_moon?
-            if show_moon(@objectInput).density != 0
-                density = show_moon(@objectInput).density
-                earthDensity = 5.5136 
-                puts "The density of #{@objectInput} is #{density} grams per cubic centimeter. That's #{density/earthDensity} that of Earth's."
+            if show_moon.density != 0
+                puts "The density of #{@objectInput} is #{show_moon.density} grams per cubic centimeter. That's #{show_moon.density/earthDensity} that of Earth's."
             else
                 puts "We don't have a measurment for this body!"
             end
@@ -129,12 +126,12 @@ class Cli
 
     def distance_to
         if is_planet?
-            puts "The perihelion (a planet's closest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).perihelion/4313 } times over."
-            puts "The aphelion (a planet's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).aphelion/4313 } times over."
+            puts "The perihelion (a planet's closest distance to the sun) of #{@objectInput} is #{show_planet.perihelion} kilometers. That's equivalent to the width of the USA #{show_planet.perihelion/4313 } times over."
+            puts "The aphelion (a planet's furthest distance to the sun) of #{@objectInput} is #{show_planet.aphelion} kilometers. That's equivalent to the width of the USA #{show_planet.aphelion/4313 } times over."
         elsif is_moon?
-            if show_moon(@objectInput).perihelion != 0
-                puts "The perihelion (a moon's closest distance to their planet) of #{@objectInput} is #{show_moon(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).perihelion/4313 } times over."
-                puts "The aphelion (a moon's furthest distance to their planet) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).aphelion/4313 } times over."
+            if show_moon.perihelion != 0
+                puts "The perihelion (a moon's closest distance to their planet) of #{@objectInput} is #{show_moon.perihelion} kilometers. That's equivalent to the width of the USA #{show_moon.perihelion/4313 } times over."
+                puts "The aphelion (a moon's furthest distance to their planet) of #{@objectInput} is #{show_moon.aphelion}  kilometers. That's equivalent to the width of the USA #{show_moon.aphelion/4313 } times over."
             else
                 puts "We don't have a measurment for this body!"
             end
@@ -145,15 +142,12 @@ class Cli
     end
 
     def get_gravity
+        earthGravity = 9.807
         if is_planet?
-            gravity = show_planet(@objectInput).gravity
-            earthGravity = 9.807
-            puts "The gravity of #{@objectInput} is #{gravity} meters per second squared. About #{gravity/earthGravity} times Earth's gravity."
+            puts "The gravity of #{@objectInput} is #{show_planet.gravity} meters per second squared. About #{show_planet.gravity/earthGravity} times Earth's gravity."
         elsif is_moon?
-            if show_moon(@objectInput).gravity != 0
-                gravity = show_moon(@objectInput).gravity
-                earthGravity = 9.807
-                puts "The gravity of #{@objectInput} is #{gravity} meters per second squared. About #{gravity/earthGravity} times Earth's gravity."
+            if show_moon.gravity != 0
+                puts "The gravity of #{@objectInput} is #{show_moon.gravity} meters per second squared. About #{show_moon.gravity/earthGravity} times Earth's gravity."
             else
                 puts "We don't have a measurment for this body!"
             end
@@ -164,20 +158,12 @@ class Cli
     end
 
     def get_mass
+        earthMass = 5.97237*(10**24)
         if is_planet?
-            massValue = show_planet(@objectInput).mass["massValue"]
-            massExponent = show_planet(@objectInput).mass["massExponent"]
-            mass = massValue * (10 ** massExponent)
-            earthMass = 7.34600*(10**22)
-            puts "The mass of #{@objectInput} is: #{mass} kilograms. This is equivalent to about #{mass/11062} school busses, or #{mass/earthMass} Earths."
+            puts "The mass of #{@objectInput} is: #{show_planet.get_mass_index} kilograms. This is equivalent to about #{show_planet.get_mass_index/11062} school busses, or #{show_planet.get_mass_index/earthMass} Earths."
         
         elsif is_moon?
-            massValue = show_moon(@objectInput).mass["massValue"]
-            massExponent = show_moon(@objectInput).mass["massExponent"]
-            mass = massValue * (10 ** massExponent)
-            earthMass = 7.34600*(10**22)
-            puts "The mass of #{@objectInput} is: #{mass} kilograms. This is equivalent to about #{mass/11062} school busses, or #{mass/earthMass} Earths."
-        
+            puts "The mass of #{@objectInput} is: #{show_moon.get_mass_index} kilograms. This is equivalent to about #{show_moon.get_mass_index/11062} school busses, or #{show_moon.get_mass_index/earthMass} Earths."
         else
             "invalid input. try again."
         end
@@ -186,17 +172,17 @@ class Cli
 
     def discovered_by
         if is_planet?
-            if show_planet(@objectInput).discoveredBy == ""
+            if show_planet.discoveredBy == ""
                 puts "It is unknown who discovered #{objectInput}."
             else
-                puts "This planet was discovered by #{show_planet(@objectInput).discoveredBy}."
+                puts "This planet was discovered by #{show_planet.discoveredBy}."
             end
         end
         if is_moon?
-            if show_moon(@objectInput).discoveredBy == ""
+            if show_moon.discoveredBy == ""
                 puts "It is unknown who discovered #{objectInput}."
             else
-                puts "This moon was discovered by #{show_moon(@objectInput).discoveredBy}."
+                puts "This moon was discovered by #{show_moon.discoveredBy}."
             end
         end
         call
@@ -204,8 +190,8 @@ class Cli
 
     def list_moons
         if is_planet?
-            if show_planet(@objectInput).find_moons != []
-                show_planet(@objectInput).find_moons.each_with_index do |moon, index| 
+            if show_planet.find_moons != []
+                show_planet.find_moons.each_with_index do |moon, index| 
                     if moon.englishName != ""
                         puts "#{index+1}. #{moon.englishName}" 
                     end
@@ -234,4 +220,3 @@ class Cli
         end
     end   
 end
-
