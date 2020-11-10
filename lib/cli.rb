@@ -30,7 +30,7 @@ class Cli
         puts "To see a list of this object's moons enter: 'list moons'"
         puts "To see the mass of this object enter: 'mass'"
         puts "To see the gravity of this object enter: 'gravity'"
-        puts "To see this object's distance to sun (at its closest) enter: 'distance to sun'"
+        puts "To see this object's distance to its orbital center (sun for planets - planet for moon) enter: 'distance to'"
         puts "To see this object's density enter: 'density'"
         puts "To see who this object was discovered by enter: 'discovered by'"
         puts "To see when this object was discovered enter: 'discovery date'"
@@ -44,8 +44,8 @@ class Cli
             get_mass
         elsif input == "gravity"
             get_gravity
-        elsif input == "distance to sun"
-            distance_to_sun
+        elsif input == "distance to"
+            distance_to
         elsif input == "density"
             get_density
         elsif input == "discovered by"
@@ -114,14 +114,14 @@ class Cli
         call
     end
 
-    def distance_to_sun
+    def distance_to
         if show_planet(@objectInput)!=nil
-            puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).perihelion/4313 } times over."
-            puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).aphelion/4313 } times over."
+            puts "The perihelion (a planet's closest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).perihelion/4313 } times over."
+            puts "The aphelion (a planet's furthest distance to the sun) of #{@objectInput} is #{show_planet(@objectInput).aphelion} kilometers. That's equivalent to the width of the USA #{show_planet(@objectInput).aphelion/4313 } times over."
         elsif show_moon(@objectInput)!=nil
             if show_moon(@objectInput).perihelion != 0
-                puts "The perihelion (an object's closest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).perihelion/4313 } times over."
-                puts "The aphelion (an object's furthest distance to the sun) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).aphelion/4313 } times over."
+                puts "The perihelion (a moon's closest distance to their planet) of #{@objectInput} is #{show_moon(@objectInput).perihelion} kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).perihelion/4313 } times over."
+                puts "The aphelion (a moon's furthest distance to their planet) of #{@objectInput} is #{show_moon(@objectInput).aphelion}  kilometers. That's equivalent to the width of the USA #{show_moon(@objectInput).aphelion/4313 } times over."
             else
                 puts "We don't have a measurment for this body!"
             end
@@ -133,10 +133,14 @@ class Cli
 
     def get_gravity
         if show_planet(@objectInput)!=nil
-            puts "The gravity of #{@objectInput} is #{show_planet(@objectInput).gravity} meters per second squared."
+            gravity = show_planet(@objectInput).gravity
+            earthGravity = 9.807
+            puts "The gravity of #{@objectInput} is #{gravity} meters per second squared. About #{gravity/earthGravity} times Earth's gravity."
         elsif show_moon(@objectInput)!=nil
             if show_moon(@objectInput).gravity != 0
-                puts "The gravity of #{@objectInput} is #{show_moon(@objectInput).gravity} meters per second squared."
+                gravity = show_moon(@objectInput).gravity
+                earthGravity = 9.807
+                puts "The gravity of #{@objectInput} is #{gravity} meters per second squared. About #{gravity/earthGravity} times Earth's gravity."
             else
                 puts "We don't have a measurment for this body!"
             end
