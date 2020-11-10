@@ -44,10 +44,7 @@ class Api
         moons = get_space_bodies.select{|body| body["aroundPlanet"] != nil}
     end
 
-    # Utility - development purposes only - Not being used in running the app. 
-    # 
-    # 
-    # 
+    ########Utility - development purposes only - Not being used in running the app.######### 
 
     # Access individual planets/moons by name from the XML
     def get_space_body_by_name(name)

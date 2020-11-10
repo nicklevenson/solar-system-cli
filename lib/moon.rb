@@ -1,3 +1,4 @@
+# This class initializes moon objects
 class Moon
     extend Findable
     attr_accessor 

@@ -56,8 +56,7 @@ class Cli
             discovered_by 
         elsif input == "discovery date"
             get_date
-        elsif input == "exit"
-            
+        elsif input == "exit"       
         elsif input == "home"
             home
         else
@@ -79,7 +78,7 @@ class Cli
         Moon.all.collect{|moon| moon.englishName}
     end
     def list_planets
-        planets.sort.each_with_index{|planet, index| puts "#{index+1}. #{planet}"}
+        planets.sort.each_with_index{|planet, index| puts "-#{planet}"}
     end
 
     def get_date
@@ -104,10 +103,14 @@ class Cli
 
     def get_density
         if show_planet(@objectInput)!=nil
-            puts "The density of #{@objectInput} is #{show_planet(@objectInput).density} grams per cubic centimeter. That's"
+            density = show_planet(@objectInput).density
+            earthDensity = 5.5136 
+            puts "The density of #{@objectInput} is #{density} grams per cubic centimeter. That's #{density/earthDensity} times that of Earth's."
         elsif show_moon(@objectInput)!=nil
             if show_moon(@objectInput).density != 0
-                puts "The density of #{@objectInput} is #{show_moon(@objectInput).density } grams per cubic centimeter."
+                density = show_moon(@objectInput).density
+                earthDensity = 5.5136 
+                puts "The density of #{@objectInput} is #{density} grams per cubic centimeter.That's #{density/earthDensity} that of Earth's."
             else
                 puts "We don't have a measurment for this body!"
             end
