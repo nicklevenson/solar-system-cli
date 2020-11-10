@@ -10,16 +10,15 @@ class Planet
             self.send("#{key}=", value)
         end
         @@all << self
-        @my_moons = find_moons
     end
+
 
     def self.all
         @@all
     end
 
     def find_moons
-        #search moon class for matching moon objects
-       Moon.all.select{|moon| moon.aroundPlanet["planet"] == @id}  
+        Moon.all.select{|moon| moon.aroundPlanet == self}
     end
 
 end

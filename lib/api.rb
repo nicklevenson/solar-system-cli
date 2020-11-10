@@ -8,6 +8,8 @@ class Api
         # add_planet_by_name(planet)
         add_moons
         add_planets
+        Moon.all.each {|moon| moon.my_planet}
+
     end
 
     # API retrieval
@@ -29,6 +31,7 @@ class Api
     # OBJECT INIT. adding all planet and moons as objects
     def add_planets
         get_list_of_planets.each {|planet| Planet.new(planet)}
+        
     end
  
     def add_moons
