@@ -65,6 +65,7 @@ class Cli
         end
     end
     
+    # Helper methods
     def show_planet
         Planet.find_by_name(@objectInput)
     end
@@ -89,6 +90,8 @@ class Cli
         show_moon!=nil
     end
 
+
+    # Methods on call
     def get_date
         if is_planet?
             if show_planet.discoveryDate != ""

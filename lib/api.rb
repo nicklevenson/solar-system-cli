@@ -9,7 +9,6 @@ class Api
         add_moons
         add_planets
         Moon.all.each {|moon| moon.my_planet}
-
     end
 
     # API retrieval
