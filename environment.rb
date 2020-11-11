@@ -1,9 +1,8 @@
 require 'pry'
 require 'httparty'
 require 'json'
-require 'colorize'
 require 'lolize/auto'
-require 'rainbow'
+
 
 
 # Require necessary files
