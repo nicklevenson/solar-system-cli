@@ -1,7 +1,7 @@
 # This class initializes planets and gives them moons from the moon class. A planet has many moons.
 class Planet 
     extend Findable
-    include HelperMethods
+    include CliHelperMethods
     attr_accessor :my_moons
     @@all = []
 
