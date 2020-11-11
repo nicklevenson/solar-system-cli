@@ -4,7 +4,15 @@ Welcome to the Solar System! - CLI app
 Description:
 This CLI app is a tool to navigate our Solar System. A user can easily get detailed data on specific planets and their moons. 
 
-Installation: 
+Installation:
+
+1) Clone down the repo from https://github.com/nicklevenson/cli-application
+2) In the terminal, navigate to the 'cli-application' folder
+3) Make sure Ruby is installed on your computer
+4) Run bundle install to install the program's gems
+5) To start the program type 'ruby bin/run'
+6) Follow the instructions in the Terminal.
+7) Have fun!
 
 Contributors: 
 
