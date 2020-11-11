@@ -6,7 +6,7 @@ require 'lolize/auto'
 require 'rainbow'
 
 
-#* Require necessary files
+# Require necessary files
 require_relative './lib/findable.rb'
 require_relative './lib/helper.rb'
 require_relative './lib/api.rb'

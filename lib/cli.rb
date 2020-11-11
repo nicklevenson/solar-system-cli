@@ -35,6 +35,7 @@ class Cli
         puts "---To see the gravity of this object enter: 'gravity'"
         puts "---To see this object's distance to its orbital center (sun for planets - planet for moon) enter: 'distance to'"
         puts "---To see this object's density enter: 'density'"
+        puts "---To see this object's diameter enter: 'diameter'"
         puts "---To see who this object was discovered by enter: 'discovered by'"
         puts "---To see when this object was discovered enter: 'discovery date'"
         puts "---To go back to the start enter: 'home'"
@@ -52,6 +53,8 @@ class Cli
             distance_to
         elsif input == "density"
             get_density
+        elsif input == "diameter"
+            get_diameter
         elsif input == "discovered by"
             discovered_by 
         elsif input == "discovery date"
@@ -90,7 +93,6 @@ class Cli
         show_moon!=nil
     end
 
-
     # Methods on call
     def get_date
         if is_planet?
@@ -105,12 +107,23 @@ class Cli
             else
                 puts "#{@objectInput} was discovered sometime during the dawn of man."
             end
-        else
-            "invalid input. try again."
         end
         call
     end
-
+    
+    def get_diameter
+        earthDiameter = 6371.00840*2
+        if is_planet?
+            puts "The diameter of #{objectInput} is #{show_planet.meanRadius*2} kilometers. That's #{(show_planet.meanRadius*2)/earthDiameter} times Earth's diameter."
+        elsif is_moon?
+            if show_moon.meanRadius != 0
+                puts "The diameter of #{objectInput} is #{show_moon.meanRadius*2} kilometers. That's #{(show_moon.meanRadius*2)/earthDiameter} times Earth's diameter."
+            else
+                puts "We don't have a measurement for this body!"
+            end
+        end
+        call
+    end
     def get_density
         earthDensity = 5.5136
         if is_planet?
@@ -121,8 +134,6 @@ class Cli
             else
                 puts "We don't have a measurment for this body!"
             end
-        else
-            "invalid input. try again."
         end
         call
     end
@@ -138,8 +149,6 @@ class Cli
             else
                 puts "We don't have a measurment for this body!"
             end
-        else
-            "invalid input. try again."
         end
         call
     end
@@ -154,8 +163,6 @@ class Cli
             else
                 puts "We don't have a measurment for this body!"
             end
-        else
-            "invalid input. try again."
         end
         call
     end
