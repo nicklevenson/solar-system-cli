@@ -1,7 +1,7 @@
 # This class initializes moon objects. A moon belongs to a planet.
 class Moon
     extend Findable
-    CliHelperMethods
+    include CliHelperMethods
     @@all = []
 
     def initialize(moon)
