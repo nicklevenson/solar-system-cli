@@ -6,7 +6,7 @@ This CLI app is a tool to navigate our Solar System. A user can easily get detai
 
 Installation and Startup:
 1) Clone down the repo from https://github.com/nicklevenson/cli-application
-2) In the terminal, navigate to the 'cli-application' folder
+2) In the terminal, navigate to the 'solar-system-cli' folder
 3) Make sure Ruby is installed on your computer
 4) Run bundle install to install the program's gems
 5) To start the program type 'ruby bin/run'
