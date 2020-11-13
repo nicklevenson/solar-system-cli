@@ -29,8 +29,7 @@ class Api
 
     # OBJECT INIT. adding all planet and moons as objects
     def add_planets
-        get_list_of_planets.each {|planet| Planet.new(planet)}
-        
+        get_list_of_planets.each {|planet| Planet.new(planet)}  
     end
  
     def add_moons
